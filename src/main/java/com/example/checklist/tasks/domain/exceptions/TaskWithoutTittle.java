@@ -1,4 +1,4 @@
-package com.example.checklist.exceptions;
+package com.example.checklist.tasks.domain.exceptions;
 
 public class TaskWithoutTittle extends RuntimeException{
     public TaskWithoutTittle() {

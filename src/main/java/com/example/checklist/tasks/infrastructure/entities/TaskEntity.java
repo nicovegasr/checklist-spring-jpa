@@ -1,4 +1,5 @@
-package com.example.checklist.tasks.entities;
+package com.example.checklist.tasks.infrastructure.entities;
+import com.example.checklist.tasks.domain.models.Task;
 import lombok.*;
 import jakarta.persistence.*;
 
@@ -18,7 +19,13 @@ public class TaskEntity {
     @Column(name = "description", length = 100, nullable = false)
     private String description;
     @Column(name = "status", nullable = false)
-    private Boolean status;
+    private Boolean completed;
     @Column(name = "erased", nullable = false)
     private Boolean erased;
+    public Task toDomainModel() {
+        return new Task(this.getIdTask(), this.getTitle(), this.getDescription(), getCompleted(), getErased());
+    }
+    public static TaskEntity fromDomainModel(Task task) {
+        return new TaskEntity(task.getIdTask(), task.getTitle(), task.getDescription(), task.isCompleted(), task.isErased());
+    }
 }
