@@ -24,9 +24,9 @@ public class TaskControllers {
     public ResponseEntity<?> all(int pageNumber) {
         MySqlJpaTaskRepositoryAdapter mySqlTaskRepositoryAdapter = new MySqlJpaTaskRepositoryAdapter(jpaTaskRepository);
         TaskServices taskServices = new TaskServices(mySqlTaskRepositoryAdapter);
-        Pageable userPages = PageRequest.of(pageNumber, 10);
+        Pageable taskPageRequest = PageRequest.of(pageNumber, 10);
         try {
-            Page<Task> tasks = taskServices.getAll(userPages);
+            Page<Task> tasks = taskServices.getAll(taskPageRequest);
             return ResponseEntity.ok(tasks);
         } catch (NoTasksFound exception) {
             return ResponseEntity.status(404).body("No tasks found in page");

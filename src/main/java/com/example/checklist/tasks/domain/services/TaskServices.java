@@ -5,8 +5,6 @@ import com.example.checklist.tasks.domain.exceptions.TaskWithoutTittle;
 import com.example.checklist.tasks.domain.exceptions.NoTasksFound;
 import com.example.checklist.tasks.domain.models.Task;
 import com.example.checklist.tasks.domain.repositories.TaskRepository;
-import com.example.checklist.tasks.infrastructure.entities.TaskEntity;
-import com.example.checklist.tasks.infrastructure.repositories.JpaTaskRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,9 +13,9 @@ public class TaskServices {
     public TaskServices(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
-    public Page<Task> getAll(Pageable userPages) {
-        Page<Task> tasks = taskRepository.findAll(userPages);
-        if (tasks.isEmpty() && userPages.getPageNumber() == 0) {
+    public Page<Task> getAll(Pageable taskPagesRequest) {
+        Page<Task> tasks = taskRepository.findAll(taskPagesRequest);
+        if (tasks.isEmpty() && taskPagesRequest.getPageNumber() == 0) {
             throw new NoTaskInDatabase();
         }
         if (tasks.isEmpty()) {
