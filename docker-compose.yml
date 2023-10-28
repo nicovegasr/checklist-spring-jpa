@@ -5,12 +5,11 @@ services:
     image: mysql:latest
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: checklistDatabase
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_HOST: '%'
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
     networks:
       - checklist-network-backend
 
@@ -19,8 +18,8 @@ services:
     build: .
     ports:
       - "8080:8080"
-    expose:
-      - "8080"
+    depends_on:
+        - checklist-database
     networks:
       - checklist-network-backend
 
