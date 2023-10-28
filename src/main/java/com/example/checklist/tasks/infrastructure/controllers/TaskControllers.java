@@ -21,7 +21,7 @@ public class TaskControllers {
         this.jpaTaskRepository = jpaTaskRepository;
     }
     @GetMapping("/tasks")
-    public ResponseEntity<?> all(int pageNumber) {
+    public ResponseEntity<?> all(@RequestParam(defaultValue = "0") int pageNumber) {
         MySqlJpaTaskRepositoryAdapter mySqlTaskRepositoryAdapter = new MySqlJpaTaskRepositoryAdapter(jpaTaskRepository);
         TaskServices taskServices = new TaskServices(mySqlTaskRepositoryAdapter);
         Pageable taskPageRequest = PageRequest.of(pageNumber, 10);
