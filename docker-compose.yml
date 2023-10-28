@@ -10,6 +10,11 @@ services:
       MYSQL_ROOT_HOST: '%'
     ports:
       - "3306:3306"
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        interval: 1s
+        timeout: 5s
+        retries: 20
     networks:
       - checklist-network-backend
 
@@ -19,7 +24,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-        - checklist-database
+        checklist-database:
+            condition: service_healthy
     networks:
       - checklist-network-backend
 
