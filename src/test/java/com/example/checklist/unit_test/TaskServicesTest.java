@@ -25,12 +25,12 @@ public class TaskServicesTest {
         TaskRepository taskRepository;
         TaskServices taskServices;
         @BeforeEach
-        public void setUp() {
+        void setUp() {
             taskRepository = mock(TaskRepository.class);
             taskServices = new TaskServices(taskRepository);
         }
         @Test
-        public void shouldCreateTask() {
+        void shouldCreateTask() {
             // Given
             Task task = new Task(1L, "Task 1", "Description 1", false, false);
             // When
@@ -40,7 +40,7 @@ public class TaskServicesTest {
             assertEquals(task.getIdTask(), taskId);
         }
         @Test
-        public void shouldNotCreateTaskWithoutTitle() {
+        void shouldNotCreateTaskWithoutTitle() {
             // Given
             Task task = new Task(1L, "", "Description 1", false, false);
             // Then
@@ -56,12 +56,12 @@ public class TaskServicesTest {
         TaskRepository taskRepository;
         TaskServices taskServices;
         @BeforeEach
-        public void setUp() {
+        void setUp() {
             taskRepository = mock(TaskRepository.class);
             taskServices = new TaskServices(taskRepository);
         }
         @Test
-        public void shouldDeleteTask() {
+        void shouldDeleteTask() {
             // Given
             Task task = new Task(1L, "Task 1", "Description 1", false, false);
             // When
@@ -71,7 +71,7 @@ public class TaskServicesTest {
             verify(taskRepository, times(1)).delete(task);
         }
         @Test
-        public void shouldNotDeleteTaskThatDoesNotExist() {
+        void shouldNotDeleteTaskThatDoesNotExist() {
             // Given
             Task task = new Task(1L, "Task 1", "Description 1", false, false);
             // Then
@@ -92,7 +92,7 @@ public class TaskServicesTest {
             taskPage = mock(Page.class);
         }
         @Test
-        public void shouldGetTasks() {
+        void shouldGetTasks() {
             // When
             when(taskRepository.findAll(taskPageRequest)).thenReturn(taskPage);
             Page<Task> tasks = taskServices.getAll(taskPageRequest);
@@ -100,14 +100,14 @@ public class TaskServicesTest {
             assertEquals(taskPage, tasks);
         }
         @Test
-        public void shouldNotGetTaskWhenThereAreNotTaskInDatabase() {
+        void shouldNotGetTaskWhenThereAreNotTaskInDatabase() {
             // When
             when(taskRepository.findAll(taskPageRequest)).thenReturn(Page.empty());
             // Then
             assertThrows(NoTaskInDatabase.class, () -> taskServices.getAll(taskPageRequest));
         }
         @Test
-        public void shouldNotGetTaskWhenThereAreNotTaskInPage() {
+        void shouldNotGetTaskWhenThereAreNotTaskInPage() {
             // Given
             taskPageRequest = PageRequest.of(1, 10);
             // When

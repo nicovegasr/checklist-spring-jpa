@@ -14,6 +14,8 @@
 	<name>checklist</name>
 	<description>Crud checklist example</description>
 	<properties>
+		<sonar.organization>nicovegasr</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
