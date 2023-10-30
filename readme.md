@@ -32,7 +32,11 @@ Esta heramienta nos permite tener analizar nuestro proyecto para ver si cumple c
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=nicovegasr_checklist-spring-jpa)](https://sonarcloud.io/summary/new_code?id=nicovegasr_checklist-spring-jpa)
 
 ## Despliegue
-Debido a el uso de Docker y Docker-Compose, el despliegue de la aplicación es muy sencillo, solo es necesario tener instalado Docker y Docker-Compose en el equipo y ejecutar el siguiente comando en la raíz del proyecto:
+Antes de ejecutar Docker es necesario compilar el proyecto con Maven.
+
+El editor de código IntelliJ tiene integradas estas funcionalidades de Maven en la pestaña correspondiente donde solo tenemos que ejecutar `clean` e `install` para generar nuestro directorio `/target`.
+
+Debido a el uso de Docker y Docker-Compose, el despliegue de la aplicación en local es muy sencillo, solo es necesario tener instalado Docker y Docker-Compose en el equipo y ejecutar el siguiente comando en la raíz del proyecto:
 * docker-compose up -d
 
 En caso de querer parar la aplicación, ejecutar el siguiente comando:
@@ -41,7 +45,7 @@ En caso de querer parar la aplicación, ejecutar el siguiente comando:
 Y si se quiere eliminar las imagenes y volúmenes asociadas a el proyecto:
 * docker-compose down --rmi all
 
-En la configuración de docker-compose se estableció un healthcheck para la base de datos, sin embargo, en caso de que no funcionase por alguna razón y el backend dé un `Communication failed` al intentar conectarse, con volver a ejecuta `docker-compose up -d` pasados unos segundos debería iniciarse sin poblemas (o levantar manualmente el contenedor  del backend.)
+En la configuración de docker-compose se estableció un healthcheck para la base de datos, sin embargo, en caso de que no funcionase por alguna razón y el backend dé un `Communication failed` al intentar conectarse, con volver a ejecuta `docker-compose up -d` pasados unos segundos debería iniciarse sin poblemas (o levantar manualmente el contenedor  del backen con `docker run`)
 
 
 ## Tecnologías/Estrategias utilizadas
