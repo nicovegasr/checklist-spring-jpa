@@ -57,3 +57,4 @@ En la configuración de docker-compose se estableció un healthcheck para la bas
 * Dockcer-Compose
 * Testing
 * Sonar Cloud
+* Paginación
