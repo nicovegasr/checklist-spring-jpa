@@ -1,8 +1,5 @@
 package com.example.checklist.tasks.infrastructure.controllers;
 
-import com.example.checklist.tasks.domain.exceptions.NoTaskInDatabase;
-import com.example.checklist.tasks.domain.exceptions.NoTasksFound;
-import com.example.checklist.tasks.domain.exceptions.TaskWithoutTittle;
 import com.example.checklist.tasks.domain.models.Task;
 import com.example.checklist.tasks.infrastructure.entities.TaskEntity;
 import com.example.checklist.tasks.infrastructure.repositories.MySqlJpaTaskRepositoryAdapter;
