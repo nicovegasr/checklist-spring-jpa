@@ -1,0 +1,35 @@
+server:
+    port: 8080
+
+spring:
+    jpa:
+        database: MySQL
+        hibernate:
+            ddl-auto: update
+        datasource:
+            url: jdbc:mysql://checklist-database:3306/${MYSQL_DATABASE}?allowPublicKeyRetrieval=true&useSSL=false
+            username: ${MYSQL_USER}
+            password: ${MYSQL_ROOT_PASSWORD}
+            driver-class-name: com.mysql.cj.jdbc.Driver
+        properties:
+            hibernate:
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        logging:
+            pattern:
+                console: "%d{ISO8601} %magenta([%thread]) %highlight(%-5level) %logger : %msg%n"
+                file: "%d{ISO8601} %magenta([%thread]) %highlight(%-5level) %logger : %msg%n"
+            level:
+                root: INFO
+                org:
+                    springframework:
+                        web:
+                            filter:
+                                CommonsRequestLoggingFilter: INFO
+        management:
+            endpoints:
+                web:
+                    exposure:
+                        include: health,info,prometheus
