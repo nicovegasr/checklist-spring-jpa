@@ -58,3 +58,18 @@ En la configuración de docker-compose se estableció un healthcheck para la bas
 * Testing
 * Sonar Cloud
 * Paginación
+
+## Features añadidas
+Para aprovechar las facilidades que aporta Spring se ha añadido un manejador global de excepciones en la capa de infra-estructura, que manejas las excepciones de dominio y retorna correspondientemente el error definido. Además, se ha utilizado el patron builder.
+
+Por otro lado, también se han añadido el uso de profiles en docker para poder probar en local la aplicación sin tener que cambiar el aplication.yaml continuamente. Asímismo, se ha configurado Prometheus para medir disitntas métricas, las métricas se almacenan en ``http://localhost:8080/api/v1/actuator/prometheus`` y mediante el uso de volúmenes se ha configurado un contenedor que apunta a el contenedor del backend para leer las metricas del mismo.
+
+Se puede acceder a la consola de prometheus mediante ``http://localhost:9090/graph`` y desde allí, visualizar las métricas correspondientes.
+
+## Mejoras a futuro
+- Cambiar los id de las task por UUID. 
+- Desacoplar la paginación de la infraestructura.
+- Añadir más tests, sobretodo end to end.
+- Utilizar flyway para la migración de la base de datos.
+- Añadir DTOs para la capa de infraestructura.
+- Integrar graphana.
