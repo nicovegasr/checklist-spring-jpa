@@ -25,41 +25,22 @@ public class TaskControllers {
         MySqlJpaTaskRepositoryAdapter mySqlTaskRepositoryAdapter = new MySqlJpaTaskRepositoryAdapter(jpaTaskRepository);
         TaskServices taskServices = new TaskServices(mySqlTaskRepositoryAdapter);
         Pageable taskPageRequest = PageRequest.of(pageNumber, 10);
-        try {
-            Page<Task> tasks = taskServices.getAll(taskPageRequest);
-            return ResponseEntity.ok(tasks);
-        } catch (NoTasksFound exception) {
-            return ResponseEntity.status(404).body("No tasks found in page");
-        } catch (NoTaskInDatabase exception) {
-            return ResponseEntity.status(404).body("No tasks found in server");
-        } catch (Exception exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
-        }
+        Page<Task> tasks = taskServices.getAll(taskPageRequest);
+        return ResponseEntity.ok(tasks);
     }
     @PostMapping("/tasks")
     public ResponseEntity<?> create(@RequestBody TaskEntity task) {
         MySqlJpaTaskRepositoryAdapter mySqlTaskRepositoryAdapter = new MySqlJpaTaskRepositoryAdapter(jpaTaskRepository);
         TaskServices taskServices = new TaskServices(mySqlTaskRepositoryAdapter);
-        try {
-            Long taskCreated = taskServices.create(task.toDomainModel());
-            return ResponseEntity.ok(taskCreated);
-        } catch (TaskWithoutTittle exception) {
-            return ResponseEntity.badRequest().body("Task without tittle is not allowed");
-        } catch (Exception exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
-        }
+        Long taskCreated = taskServices.create(task.toDomainModel());
+        return ResponseEntity.ok(taskCreated);
+
     }
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         MySqlJpaTaskRepositoryAdapter mySqlTaskRepositoryAdapter = new MySqlJpaTaskRepositoryAdapter(jpaTaskRepository);
         TaskServices taskServices = new TaskServices(mySqlTaskRepositoryAdapter);
-        try {
-            taskServices.delete(id);
-            return ResponseEntity.ok().build();
-        } catch (NoTasksFound exception) {
-            return ResponseEntity.status(404).body("Task with id " + id + " not found");
-        } catch (Exception exception) {
-            return ResponseEntity.badRequest().body(exception.getMessage());
-        }
+        taskServices.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
