@@ -34,10 +34,10 @@ public class TaskServicesTest {
             // Given
             Task task = new Task(1L, "Task 1", "Description 1", false, false);
             // When
-            when(taskRepository.save(task)).thenReturn(task.getIdTask());
+            when(taskRepository.save(task)).thenReturn(task.idTask());
             Long taskId = taskServices.create(task);
             // Then
-            assertEquals(task.getIdTask(), taskId);
+            assertEquals(task.idTask(), taskId);
         }
         @Test
         void shouldNotCreateTaskWithoutTitle() {
@@ -65,8 +65,8 @@ public class TaskServicesTest {
             // Given
             Task task = new Task(1L, "Task 1", "Description 1", false, false);
             // When
-            when(taskRepository.findById(task.getIdTask())).thenReturn(task);
-            taskServices.delete(task.getIdTask());
+            when(taskRepository.findById(task.idTask())).thenReturn(task);
+            taskServices.delete(task.idTask());
             // Then
             verify(taskRepository, times(1)).delete(task);
         }
@@ -75,7 +75,7 @@ public class TaskServicesTest {
             // Given
             Task task = new Task(1L, "Task 1", "Description 1", false, false);
             // Then
-            assertThrows(NoTasksFound.class, () -> taskServices.delete(task.getIdTask()));
+            assertThrows(NoTasksFound.class, () -> taskServices.delete(task.idTask()));
         }
     }
     @Nested

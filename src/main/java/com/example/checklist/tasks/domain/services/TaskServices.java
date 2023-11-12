@@ -24,7 +24,7 @@ public class TaskServices {
         return tasks;
     }
     public long create(Task task) {
-        if (task.getTitle().isEmpty()) {
+        if (task.title().isEmpty()) {
             throw new TaskWithoutTittle();
         }
         return taskRepository.save(task);

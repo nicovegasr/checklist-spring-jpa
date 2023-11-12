@@ -18,7 +18,7 @@ public class TaskEntity {
     private String title;
     @Column(name = "description", length = 100, nullable = false)
     private String description;
-    @Column(name = "status", nullable = false)
+    @Column(name = "completed", nullable = false)
     private Boolean completed;
     @Column(name = "erased", nullable = false)
     private Boolean erased;
@@ -26,6 +26,6 @@ public class TaskEntity {
         return new Task(this.getIdTask(), this.getTitle(), this.getDescription(), getCompleted(), getErased());
     }
     public static TaskEntity fromDomainModel(Task task) {
-        return new TaskEntity(task.getIdTask(), task.getTitle(), task.getDescription(), task.isCompleted(), task.isErased());
+        return new TaskEntity(task.idTask(), task.title(), task.description(), task.completed(), task.erased());
     }
 }
