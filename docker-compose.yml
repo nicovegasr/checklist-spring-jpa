@@ -32,5 +32,18 @@ services:
     networks:
       - checklist-network-backend
 
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-cloud.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    depends_on:
+      - checklist-database
+    networks:
+      - checklist-network-backend
+
 networks:
   checklist-network-backend:
