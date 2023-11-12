@@ -7,4 +7,4 @@ EXPOSE 8080
 
 COPY /target/checklist-0.0.1-SNAPSHOT.jar checklist.jar
 
-CMD ["java", "-jar", "checklist.jar"]
+CMD ["java", "-Dspring.profiles.active=cloud", "-jar", "checklist.jar"]
