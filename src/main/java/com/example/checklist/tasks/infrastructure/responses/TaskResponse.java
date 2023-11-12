@@ -1,4 +1,4 @@
-package com.example.checklist.tasks.infrastructure.exceptions;
+package com.example.checklist.tasks.infrastructure.responses;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +9,9 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class TaskResponseError{
+public class TaskResponse {
     private String timestamp;
     private int statusCode;
     private String statusName;
-    private String errorMessage;
+    private String message;
 }
